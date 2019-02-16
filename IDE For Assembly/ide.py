@@ -24,10 +24,6 @@ from plistlib import *
 import os
 
 
-
-
-
-
 """ Write config info as a p-list file. """
 
 

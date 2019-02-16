@@ -13,6 +13,7 @@ from enum import Enum, unique
 import math
 import time
 
+
 @unique
 class Instructions(Enum):
         SET_MEM = "0"
@@ -78,7 +79,9 @@ class RAM:
         self.memory = dict()
 
     def read(self, address):
-        assert 0 <= address <= self.addressWidth.max_value()
+        if not (0 <= address <= self.addressWidth.max_value()):
+            raise RuntimeError("invalide address: "+str(address))
+
 
         return self.memory.get(address, 0)
 
@@ -117,6 +120,7 @@ class CPU:
 
         # no instruction yet
         self.current_instruction = None
+        self.current_instruction_decoded = None
 
     def set_instructions(self, commands: list):
         # instructions are in hex form,
@@ -137,14 +141,15 @@ class CPU:
         self.current_instruction = self.instructions.read(self.program_counter)
 
     def decode(self):
+
         instr, param = list(hex(self.current_instruction)[2:].zfill(2))
 
         instruction = Instructions.find_instruction(instr)
 
-        self.current_instruction = (instruction, int(param, 16))
+        self.current_instruction_decoded = (instruction, int(param, 16))
 
     def execute(self):
-        i, p = self.current_instruction
+        i, p = self.current_instruction_decoded
 
         #                               LS 4bits | RS 4 bits
         memory_address = self.mem_reg.value * 16 + p
@@ -228,7 +233,7 @@ class CPU:
             a = self.reg_a.value
             b = self.reg_b.value
 
-            a = (16*a) % 256 # leftshift 4 bits
+            a = (16*a) % 256  # leftshift 4 bits
             value = a+b
 
             self.memory.write(memory_address, value)
@@ -255,12 +260,13 @@ class CPU:
 
             if set(line.split("\t")) == {'0', ''} or \
                set(line.split("\t")) == {'0'} or \
-                            line == "\n" or \
-                            line == "":
-                ram_lines = ram_lines[:-1]
+               line == "\n" or \
+               line == "":
+                    ram_lines = ram_lines[:-1]
             else:
                 break
-        ram =  "\n\t\t".join(ram_lines)
+
+        ram = "\n\t\t".join(ram_lines)
         if ram.strip() == "":
             ram = "Empty"
         output_str += "RAM:\t" + ram
@@ -269,6 +275,7 @@ class CPU:
 
 
 if __name__ == "__main__":
+    # test setting 3 and 4 into registers and adding them together.
     testCommands = ["73", "84", "50", "ff"]
 
     cpu = CPU()
@@ -281,5 +288,4 @@ if __name__ == "__main__":
         cpu.execute()
 
         print(cpu)
-        time.sleep(0.5)
-
+        print()

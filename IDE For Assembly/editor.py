@@ -4,7 +4,6 @@ EDITOR.PY
 
 """
 
-# imports
 from tkinter import *
 from tkinter import filedialog
 import re
@@ -14,61 +13,68 @@ from os.path import expanduser
 
 import simulated_cpu
 
+import time
+
 
 """ Temporary business, but until the codes get done through plist"""
 
 CPU_COMMAND_CODES = {
-    "SET_MEM"   : "0",
-    "LOAD_A"    : "1",
-    "LOAD_B"    : "2",
-    "WRITE_A"   : "3",
-    "WRITE_B"   : "4",
-    "ADD_A_B"   : "5",
-    "SUB_A_B"   : "6",
-    "SET_A"     : "7",
-    "SET_B"     : "8",
-    "NC_JUMP"   : "9",
-    "C_JUMP"    : "a",
-    "MUL_A_B"   : "b",
-    "DIV_A_B"   : "c",
-    "MOD_IR"    : "d",
-    "LS_REG"    : "e",
-    "HALT"      : "f"
+    "SET_MEM": "0",
+    "LOAD_A": "1",
+    "LOAD_B": "2",
+    "WRITE_A": "3",
+    "WRITE_B": "4",
+    "ADD_A_B": "5",
+    "SUB_A_B": "6",
+    "SET_A": "7",
+    "SET_B": "8",
+    "NC_JUMP": "9",
+    "C_JUMP": "a",
+    "MUL_A_B": "b",
+    "DIV_A_B": "c",
+    "MOD_IR": "d",
+    "LS_REG": "e",
+    "HALT": "f"
 }
 
 regex = re.compile("("+"|".join(CPU_COMMAND_CODES.keys())+")\s+([0-9]|[a-f])")
 
 current_working_file = None
 
+# don't copy paste! write in explicitly.
+current_assembly_compiler = os.getenv("HOME")+"/Documents/LogisimCPU/" \
+                            "Compiler/V1/AssemblyCompilerV1.py"
+# print(os.path.exists(current_assembly_compiler))
 
-current_assembly_compiler = "/Users/kallatt/Documents/4BitCPUProject/Compiler/V1/AssemblyCompilerV1.py"
 
-os_script = lambda x, y: "python3 "+x+" "+y
+def os_script(x, y):
+    return "python3 "+x+" "+y
 
 
 class TextLineNumbers(Canvas):
     def __init__(self, *args, **kwargs):
         Canvas.__init__(self, *args, **kwargs)
-        self.textwidget = None
+        self.text_widget = None
 
     def attach(self, text_widget):
-        self.textwidget = text_widget
+        self.text_widget = text_widget
 
-    def redraw(self, *args):
-        '''redraw line numbers'''
+    def redraw(self):
+        # redraw line numbers
         self.delete("all")
 
-        i = self.textwidget.index("@0,0")
+        i = self.text_widget.index("@0,0")
         num_lines = 0
         while True:
-            next_i = self.textwidget.index("%s+1line" % i)
+            next_i = self.text_widget.index("%s+1line" % i)
 
-            line_content = self.textwidget.get(i, next_i)
+            line_content = self.text_widget.get(i, next_i)
 
-            dline = self.textwidget.dlineinfo(i)
+            dline = self.text_widget.dlineinfo(i)
 
             if dline is None:
                 break
+
             if line_content.strip() != "":
                 num_lines += 1
 
@@ -78,9 +84,17 @@ class TextLineNumbers(Canvas):
 
             if not regex.match(line_content.strip()):
                 linenum = "ERR"
+                try:
+                    if line_content.strip()[0] == "#":  # comment, ignore
+                        linenum = "CMT"
+                except IndexError:
+                    pass
+
+                num_lines -= 1 # don't over count
 
             if line_content.strip() == "":
                 linenum = ""
+                num_lines += 1
 
             if len(linenum) == 1:
                 linenum = "0"+linenum
@@ -111,13 +125,12 @@ class CustomText(Text):
         # generate an event if something was added or deleted,
         # or the cursor position changed
         if (args[0] in ("insert", "replace", "delete") or
-            args[0:3] == ("mark", "set", "insert") or
-            args[0:2] == ("xview", "moveto") or
-            args[0:2] == ("xview", "scroll") or
-            args[0:2] == ("yview", "moveto") or
-            args[0:2] == ("yview", "scroll")
-        ):
-            self.event_generate("<<Change>>", when="tail")
+           args[0:3] == ("mark", "set", "insert") or
+           args[0:2] == ("xview", "moveto") or
+           args[0:2] == ("xview", "scroll") or
+           args[0:2] == ("yview", "moveto") or
+           args[0:2] == ("yview", "scroll")):
+                self.event_generate("<<Change>>", when="tail")
 
         # return what the actual widget returned
         return result
@@ -126,6 +139,9 @@ class CustomText(Text):
 class Editor(Frame):
     def __init__(self, *args, **kwargs):
         Frame.__init__(self, *args, **kwargs)
+
+        #Frame.geometry("700x700")  # controls size
+
 
         self.font = ("Courier New", 14)  # can later change with plist
 
@@ -143,7 +159,8 @@ class Editor(Frame):
         self.text.bind("<<Change>>", self._on_change)
         self.text.bind("<Configure>", self._on_change)
 
-        self.pack(side="top", fill="both", expand=True)
+        self.config(width=700, height=350)
+        self.pack(side="top", fill="both", expand=False)
 
     def _on_change(self, event):
         self.linenumbers.redraw()
@@ -152,17 +169,13 @@ class Editor(Frame):
 editor = None
 
 
-def sample():
-    print("sample")
-
-
-def getEditorContent() -> str:
+def get_editor_content() -> str:
     if editor is None:
         raise Exception("Editor Does Not Exist")
     return editor.text.get("1.0", END)
 
 
-def setEditorContent(content: str):
+def set_editor_content(content: str):
     if editor is None:
         raise Exception("Editor Does Not Exist")
     editor.text.delete(1.0, END)
@@ -173,22 +186,23 @@ def save_file():
     global current_working_file
     home = expanduser("~")
 
-
     if current_working_file is None:
         f = filedialog.asksaveasfilename(initialdir=home, title="Select file")
-        if f is None or f == '': # asksaveasfile return `None` if dialog closed with "cancel".
+
+        # asksaveasfile return `None`  if dialog closed with "cancel".
+        if f is None or f == '':
             return
 
         current_working_file = f
 
         f = open(f, 'w')
 
-        text2save = str(getEditorContent()) # starts from `1.0`, not `0.0`
+        text2save = str(get_editor_content())  # starts from `1.0`, not `0.0`
         f.write(text2save)
         f.close()
     else:
         f = open(str(current_working_file), 'w')
-        f.write(getEditorContent())
+        f.write(get_editor_content())
         f.close()
 
 
@@ -201,7 +215,7 @@ def open_file():
     contents = open(f, 'r').read()
 
     current_working_file = f
-    setEditorContent(contents)
+    set_editor_content(contents)
 
     pass
 
@@ -220,12 +234,13 @@ def compile_file():
         raise Exception("Compile Failed")
 
 
-def run_file():
+def run_file(outputLabel):
     global current_working_file
 
     compile_file()  # need to compile first
 
-    compiled_file = current_working_file[0:current_working_file.rfind(".")]+"_Compiled"
+    compiled_file = current_working_file[0:current_working_file.rfind(".")]\
+        + "_Compiled"
 
     content = open(compiled_file, 'r').read()
 
@@ -235,16 +250,27 @@ def run_file():
 
     content = content.split()
 
-    content = dict([(hex(i)[2:], content[i]) for i in range(len(content))])
+    cpu.set_instructions(content)
 
-    print(content)
+    while cpu.is_enabled():
+        cpu.fetch()
+        cpu.decode()
+        cpu.execute()
 
-    pass
+    outputLabel.config(text=str(cpu))
+    outputLabel.update()
 
 
 if __name__ == "__main__":
     root = Tk()
     editor = Editor(root)
+
+    root.title("ASSEMBLY IDE")
+    root.geometry("700x700")  # controls size
+
+    output = Label(root)
+    output.config(text="")
+    output.pack()
 
     menubar = Menu(root)
 
@@ -253,7 +279,7 @@ if __name__ == "__main__":
     filemenu.add_command(label="Open", command=open_file)
     filemenu.add_command(label="Save", command=save_file)
     filemenu.add_command(label="Compile", command=compile_file)
-    filemenu.add_command(label="Run", command=run_file)
+    filemenu.add_command(label="Run", command=lambda: run_file(output))
     filemenu.add_separator()
     filemenu.add_command(label="Exit", command=root.quit)
     menubar.add_cascade(label="File", menu=filemenu)
