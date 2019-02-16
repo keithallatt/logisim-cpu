@@ -1,0 +1,18 @@
+SET_A f
+WRITE_A 0
+SET_A 2
+WRITE_A 1
+
+SET_A 6
+WRITE_A 3
+
+SET_A 0
+
+
+LOAD_A 0
+LOAD_B 1
+SUB_A_B 0
+
+C_JUMP 3
+
+HALT f

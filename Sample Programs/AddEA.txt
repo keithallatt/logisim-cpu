@@ -1,0 +1,4 @@
+SET_A e
+SET_B a
+ADD_A_B 0
+HALT 0

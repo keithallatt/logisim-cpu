@@ -1,0 +1,18 @@
+{
+    "SET_MEM"   : "0",
+    "LOAD_A"    : "1",
+    "LOAD_B"    : "2",
+    "WRITE_A"   : "3",
+    "WRITE_B"   : "4",
+    "ADD_A_B"   : "5",
+    "SUB_A_B"   : "6",
+    "SET_A"     : "7",
+    "SET_B"     : "8",
+    "NC_JUMP"   : "9",
+    "C_JUMP"    : "a",
+    "MUL_A_B"   : "b",
+    "DIV_A_B"   : "c",
+    "MOD_IR"    : "d",
+    "LS_REG"    : "e",
+    "HALT"      : "f"
+}
