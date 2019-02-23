@@ -9,7 +9,7 @@ The CPU I've designed is by no means the most efficient design, but its purpose 
 
 ## Assembly
 
-Abstracting the instructions from a byte of information into a language is not an easy task, but necessary for any development on a new CPU. By learning the Assembly language for a particular CPU, we can learn more about the inner workings without memorizing machine codes. The current version of the Assembly language I have put together uses 16 commands to work on the CPU. Writing out a command name and a parameter separated by a space on each line translates to a unique command as seen in the `documentation/` folder. A collection of lines like this constitute a program in Assembly. Because this CPU works with 8 bit numbers, yet can only provide a nibble for a command and as a parameter, some of the commands below are required to write larger values, such as LS REG. 
+Abstracting the instructions from a byte of information into a language is not an easy task, but necessary for any development on a new CPU. By learning the Assembly language for a particular CPU, we can learn more about the inner workings without memorizing machine codes. The current version of the Assembly language I have put together uses 16 commands to work on the CPU. Writing out a command name and a parameter separated by a space on each line translates to a unique command as seen in the `Documentation/` folder. A collection of lines like this constitute a program in Assembly. Because this CPU works with 8 bit numbers, yet can only provide a nibble for a command and as a parameter, some of the commands below are required to write larger values, such as LS REG. 
 
 ## The Compiler
 
