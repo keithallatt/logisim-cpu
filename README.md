@@ -2,8 +2,13 @@
 
 In this project, I created a Turing-complete CPU in Logisim. From this, I created some documentation showing the functionality. Running code on the CPU is difficult, as it required writing machine code. To solve this, I created a basic Assembly language that includes loading, writing, and setting values in one of a 3 registers (`REG A`, `REG B`, and `MemAddrReg`), making conditional and nonconditional jumps, and basic arithmetic (+, -, x, /). 
 
-## The CPU
+## What I'm Learning
+- Functionality of Turing-complete CPUs
+- How to go about writing a programming language
+- How to create a compiler
+- How to create a simple IDE
 
+## The CPU
 
 The CPU I've designed is by no means the most efficient design, but its purpose isn't to be the most efficient or the fastest, but rather as a learning experience. The design is not the same as most low-powered CPUs, as there are separate memory banks for the instructions and the usable memory. There is functionality to manipulate the contents of the instruction bank, but that is purely to alter the course of the program. Each 8-bit memory bank can hold 256 bytes of information, leading to a maximum program size of 256 bytes, and a total of 256 bytes of usable memory. There are various registers in the CPU that can each hold a small amount of information. Registers A and B can each hold a byte of information, the Memory Address Register can hold half a byte (a nibble) of information, and the Carry On Operation Register can hold a measely 1 bit of information. Combining these memory registers, there is a total of 514.625 bytes (4117 bits) of information stored at any given moment, 258 bytes being usable between the memory bank, and two main registers.
 
@@ -25,10 +30,3 @@ This compiler is written in python, due to its flexibility and lightweight code 
 ## Integrated Development Environment
 
 Sometimes the compiler for a language is not enough. For decent code production, an integrated development environment (IDE) is required. I built mine to be able to open, save, compile and run sample programs. This IDE is limited, but so is the language, and so is the CPU. 
-
-# What I'm Learning
-- Functionality of Turing-complete CPUs
-- How to go about writing a programming language
-- How to create a compiler
-- How to create a simple IDE
-
