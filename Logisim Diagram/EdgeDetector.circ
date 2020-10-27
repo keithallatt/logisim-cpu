@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="2.14.6" version="1.0">
+This file is intended to be loaded by Logisim-evolution (https://github.com/reds-heig/logisim-evolution).
+<lib desc="#Wiring" name="0">
+    <tool name="Splitter">
+      <a name="facing" val="west"/>
+    </tool>
+  </lib>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2">
+    <tool name="Multiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+    <tool name="Demultiplexer">
+      <a name="enable" val="false"/>
+    </tool>
+  </lib>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4">
+    <tool name="ROM">
+      <a name="contents">addr/data: 8 8
+0
+</a>
+    </tool>
+  </lib>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#HDL-IP" name="6">
+    <tool name="VHDL Entity">
+      <a name="content">--------------------------------------------------------------------------------
+-- HEIG-VD, institute REDS, 1400 Yverdon-les-Bains
+-- Project :
+-- File    :
+-- Autor   :
+-- Date    :
+--
+--------------------------------------------------------------------------------
+-- Description :
+--
+--------------------------------------------------------------------------------
+
+library ieee;
+  use ieee.std_logic_1164.all;
+  --use ieee.numeric_std.all;
+
+entity VHDL_Component is
+  port(
+  ------------------------------------------------------------------------------
+  --Insert input ports below
+    horloge_i  : in  std_logic;                    -- input bit example
+    val_i      : in  std_logic_vector(3 downto 0); -- input vector example
+  ------------------------------------------------------------------------------
+  --Insert output ports below
+    max_o      : out std_logic;                    -- output bit example
+    cpt_o      : out std_logic_Vector(3 downto 0)  -- output vector example
+    );
+end VHDL_Component;
+
+--------------------------------------------------------------------------------
+--Complete your VHDL description below
+architecture type_architecture of VHDL_Component is
+
+
+begin
+
+
+end type_architecture;
+</a>
+    </tool>
+  </lib>
+  <lib desc="#TCL" name="7">
+    <tool name="TclGeneric">
+      <a name="content">library ieee;
+use ieee.std_logic_1164.all;
+
+entity TCL_Generic is
+  port(
+    --Insert input ports below
+    horloge_i  : in  std_logic;                    -- input bit example
+    val_i      : in  std_logic_vector(3 downto 0); -- input vector example
+
+	  --Insert output ports below
+    max_o      : out std_logic;                    -- output bit example
+    cpt_o      : out std_logic_Vector(3 downto 0)  -- output vector example
+  );
+end TCL_Generic;
+</a>
+    </tool>
+  </lib>
+  <lib desc="#Base" name="8">
+    <tool name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="SansSerif plain 12"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+  </lib>
+  <lib desc="#BFH-Praktika" name="9"/>
+  <main name="Combined_Edge_Detector"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+    <a name="tickmain" val="half_period"/>
+  </options>
+  <mappings>
+    <tool lib="8" map="Button2" name="Menu Tool"/>
+    <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="8" name="Poke Tool"/>
+    <tool lib="8" name="Edit Tool"/>
+    <tool lib="8" name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="SansSerif plain 12"/>
+      <a name="halign" val="center"/>
+      <a name="valign" val="base"/>
+    </tool>
+    <sep/>
+    <tool lib="0" name="Pin"/>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </tool>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+  </toolbar>
+  <circuit name="Combined_Edge_Detector">
+    <a name="circuit" val="Combined_Edge_Detector"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif bold 16"/>
+    <a name="circuitnamedbox" val="true"/>
+    <a name="circuitvhdlpath" val=""/>
+    <appear>
+      <rect height="3" stroke="none" width="10" x="50" y="69"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="65" y="64"/>
+      <rect height="3" stroke="none" width="10" x="100" y="59"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="95" y="64"/>
+      <rect height="3" stroke="none" width="10" x="100" y="79"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="95" y="84"/>
+      <circ-port height="10" pin="480,190" width="10" x="105" y="55"/>
+      <rect fill="none" height="40" stroke="#000000" stroke-width="2" width="40" x="60" y="50"/>
+      <text fill="#808080" font-family="SansSerif" font-size="12" text-anchor="middle" x="92" y="64">R</text>
+      <text fill="#808080" font-family="SansSerif" font-size="12" text-anchor="middle" x="91" y="84">F</text>
+      <polyline fill="none" points="75,80 75,83" stroke="#808080"/>
+      <polyline fill="none" points="75,60 75,63" stroke="#808080"/>
+      <polyline fill="none" points="75,56 75,59" stroke="#808080"/>
+      <polyline fill="none" points="75,76 75,79" stroke="#808080"/>
+      <polyline fill="none" points="75,76 70,76" stroke="#808080"/>
+      <polyline fill="none" points="75,83 80,83" stroke="#808080"/>
+      <circ-port height="8" pin="320,200" width="8" x="46" y="66"/>
+      <circ-port height="10" pin="480,250" width="10" x="105" y="75"/>
+      <polyline fill="none" points="75,63 70,63" stroke="#808080"/>
+      <polyline fill="none" points="75,56 80,56" stroke="#808080"/>
+      <circ-anchor facing="east" height="6" width="6" x="47" y="67"/>
+    </appear>
+    <wire from="(320,200)" to="(380,200)"/>
+    <wire from="(380,180)" to="(380,200)"/>
+    <wire from="(380,240)" to="(380,260)"/>
+    <wire from="(380,200)" to="(390,200)"/>
+    <wire from="(380,260)" to="(390,260)"/>
+    <wire from="(380,180)" to="(410,180)"/>
+    <wire from="(380,240)" to="(410,240)"/>
+    <wire from="(440,250)" to="(480,250)"/>
+    <wire from="(440,190)" to="(480,190)"/>
+    <wire from="(380,200)" to="(380,210)"/>
+    <wire from="(380,230)" to="(380,240)"/>
+    <comp lib="1" loc="(410,200)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(380,230)" name="NOT Gate">
+      <a name="facing" val="south"/>
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(410,260)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="0" loc="(320,200)" name="Pin"/>
+    <comp lib="1" loc="(440,190)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(440,250)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(480,190)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(480,250)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+  </circuit>
+  <circuit name="Rising_Edge_Detector">
+    <a name="circuit" val="Rising_Edge_Detector"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif bold 16"/>
+    <a name="circuitnamedbox" val="true"/>
+    <a name="circuitvhdlpath" val=""/>
+    <appear>
+      <rect height="3" stroke="none" width="10" x="50" y="59"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="65" y="64"/>
+      <rect height="3" stroke="none" width="10" x="90" y="59"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="85" y="64"/>
+      <rect fill="none" height="20" stroke="#000000" stroke-width="2" width="30" x="60" y="50"/>
+      <text fill="#808080" font-family="SansSerif" font-size="12" text-anchor="middle" x="82" y="64">R</text>
+      <polyline fill="none" points="70,60 70,56" stroke="#808080"/>
+      <polyline fill="none" points="70,64 70,60" stroke="#808080"/>
+      <polyline fill="none" points="66,64 69,64" stroke="#808080"/>
+      <polyline fill="none" points="71,56 74,56" stroke="#808080"/>
+      <circ-port height="10" pin="480,190" width="10" x="95" y="55"/>
+      <circ-port height="8" pin="320,200" width="8" x="46" y="56"/>
+      <circ-anchor facing="east" height="6" width="6" x="97" y="57"/>
+    </appear>
+    <wire from="(320,200)" to="(380,200)"/>
+    <wire from="(380,180)" to="(380,200)"/>
+    <wire from="(380,200)" to="(390,200)"/>
+    <wire from="(380,180)" to="(410,180)"/>
+    <wire from="(440,190)" to="(480,190)"/>
+    <comp lib="0" loc="(480,190)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(320,200)" name="Pin"/>
+    <comp lib="1" loc="(410,200)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(440,190)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+  </circuit>
+  <circuit name="Falling_Edge_Detector">
+    <a name="circuit" val="Falling_Edge_Detector"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif bold 16"/>
+    <a name="circuitnamedbox" val="true"/>
+    <a name="circuitvhdlpath" val=""/>
+    <appear>
+      <rect height="3" stroke="none" width="10" x="50" y="59"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="65" y="64"/>
+      <rect height="3" stroke="none" width="10" x="90" y="59"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="85" y="64"/>
+      <rect fill="none" height="20" stroke="#000000" stroke-width="2" width="30" x="60" y="50"/>
+      <text fill="#808080" font-family="SansSerif" font-size="12" text-anchor="middle" x="81" y="65">F</text>
+      <polyline fill="none" points="70,64 70,60" stroke="#808080"/>
+      <polyline fill="none" points="70,60 70,56" stroke="#808080"/>
+      <polyline fill="none" points="66,56 70,56" stroke="#808080"/>
+      <polyline fill="none" points="70,64 74,64" stroke="#808080"/>
+      <circ-port height="10" pin="480,190" width="10" x="95" y="55"/>
+      <circ-port height="8" pin="320,200" width="8" x="46" y="56"/>
+      <circ-anchor facing="east" height="6" width="6" x="97" y="57"/>
+    </appear>
+    <wire from="(380,180)" to="(380,200)"/>
+    <wire from="(380,200)" to="(390,200)"/>
+    <wire from="(380,180)" to="(410,180)"/>
+    <wire from="(320,200)" to="(340,200)"/>
+    <wire from="(360,200)" to="(380,200)"/>
+    <wire from="(440,190)" to="(480,190)"/>
+    <comp lib="1" loc="(440,190)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(480,190)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="1" loc="(410,200)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="0" loc="(320,200)" name="Pin"/>
+    <comp lib="1" loc="(360,200)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+  </circuit>
+  <circuit name="Bidirectional_Edge_Detector">
+    <a name="circuit" val="Bidirectional_Edge_Detector"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif bold 16"/>
+    <a name="circuitnamedbox" val="true"/>
+    <a name="circuitvhdlpath" val=""/>
+    <appear>
+      <polyline fill="none" points="80,64 84,64" stroke="#808080"/>
+      <rect height="3" stroke="none" width="10" x="100" y="59"/>
+      <text fill="#808080" font-family="SansSerif" font-size="12" text-anchor="middle" x="91" y="65">B</text>
+      <rect fill="none" height="20" stroke="#000000" stroke-width="2" width="50" x="60" y="50"/>
+      <polyline fill="none" points="76,56 80,56" stroke="#808080"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="start" x="65" y="64"/>
+      <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="85" y="64"/>
+      <polyline fill="none" points="80,64 80,60" stroke="#808080"/>
+      <polyline fill="none" points="80,60 80,56" stroke="#808080"/>
+      <rect height="3" stroke="none" width="10" x="50" y="59"/>
+      <polyline fill="none" points="68,56 72,56" stroke="#808080"/>
+      <polyline fill="none" points="68,60 68,56" stroke="#808080"/>
+      <polyline fill="none" points="68,64 68,60" stroke="#808080"/>
+      <polyline fill="none" points="64,64 68,64" stroke="#808080"/>
+      <circ-port height="10" pin="490,200" width="10" x="105" y="55"/>
+      <circ-port height="8" pin="320,200" width="8" x="46" y="56"/>
+      <circ-anchor facing="east" height="6" width="6" x="107" y="57"/>
+    </appear>
+    <wire from="(320,200)" to="(380,200)"/>
+    <wire from="(380,180)" to="(410,180)"/>
+    <wire from="(380,240)" to="(410,240)"/>
+    <wire from="(450,210)" to="(450,250)"/>
+    <wire from="(380,200)" to="(380,210)"/>
+    <wire from="(380,230)" to="(380,240)"/>
+    <wire from="(440,250)" to="(450,250)"/>
+    <wire from="(440,190)" to="(450,190)"/>
+    <wire from="(380,180)" to="(380,200)"/>
+    <wire from="(380,240)" to="(380,260)"/>
+    <wire from="(480,200)" to="(490,200)"/>
+    <wire from="(380,200)" to="(390,200)"/>
+    <wire from="(380,260)" to="(390,260)"/>
+    <comp lib="1" loc="(410,200)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="0" loc="(320,200)" name="Pin"/>
+    <comp lib="1" loc="(380,230)" name="NOT Gate">
+      <a name="facing" val="south"/>
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(440,190)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(410,260)" name="NOT Gate">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="1" loc="(440,250)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(480,200)" name="OR Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="0" loc="(490,200)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+  </circuit>
+</project>
